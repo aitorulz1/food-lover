@@ -1,0 +1,70 @@
+.card {
+    position: relative;
+    text-align: center;
+    margin: 50px 0px;
+    padding: 30px 0px 35px 0px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 4px rgb(0 0 0 / 16%);
+    width: 31%;
+    float: left;
+    margin: 1%;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.data{
+    height: 125px;
+    padding: 0px 25px;;
+    text-align: left;
+}
+
+.delete{
+    background: #ff0a15;
+    color: #fff;
+    width: 90%;
+    margin: 30px 0px 0px 0px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    -webkit-box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.16); 
+    box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.16);
+    pointer-events: auto;
+}
+
+.delete:hover{
+    background: #fff;
+    color: #ff0a15;
+    width: 90%;
+    margin: 30px 0px 0px 0px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    -webkit-box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.16); 
+    box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.16);
+    pointer-events: auto; 
+}
+
+.card .delete{
+    width: 90%;
+
+}
+
+span.title {
+    font-weight: bold;
+}
+
+
+
+
+
+@media (max-width: 620px) {
+    .card {
+        margin: 50px 0px;
+        padding: 30px 0px 35px 0px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px 4px rgb(0 0 0 / 16%);
+        width: 100%;
+        float: left;
+        margin: 1%;
+    }
+}
