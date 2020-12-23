@@ -5,7 +5,7 @@ import './Recordatorio.css'
 export default function Recordatorio({cita, eliminarCita}) {
 
     
-    const { nombre, fecha, hora, direccion, precio, notas, id } = cita;
+    const { nombre, fecha, hora, time, categoria, sensacion, precio, direccion, notas, id } = cita;
     
     const [ empty, guardarEmpty ] = useState(false);
     const [ price, showPrice ] = useState(false);
@@ -19,7 +19,7 @@ export default function Recordatorio({cita, eliminarCita}) {
         }else if(price.length === 0) {
             showPrice(true)
         }
-    }, [fecha, hora, notas])
+    }, [fecha, hora, notas, sensacion, precio])
 
 
     return (
@@ -34,10 +34,16 @@ export default function Recordatorio({cita, eliminarCita}) {
                 (<div className="cuando"><span className="title">Fecha:</span> {fecha} <span className="title">Hora:</span> {hora}</div>)
                 }
 
+                <div className="nombre"><span className="title">Time:</span> {time}</div>
+                
+                <div className="nombre"><span className="title">Categoría:</span> {categoria}</div>
+
                 {!price ? null :
                 (<div className="cuando"><span className="title">Precio:</span> {precio}</div>)
                 }
                 
+                <div className="nombre"><span className="title">Percepción:</span> {sensacion}</div>
+
                 <div className="direccion"><span className="title">Dirección:</span> {direccion}</div>
 
                 {observ ? 'Observaciones: Nada que decir...' : 

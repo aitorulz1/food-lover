@@ -7,21 +7,22 @@ import './Formulario.css'
 
 export default function Formulario({almacenarRecordatorio}) {
 
+    const [ setprecio, setPrecio ] = useState('');
 
     const [ recordatorio, guardarRecordatorio ] = useState({
         nombre:'',
         fecha:'',
         hora:'',
         time:'',
-        resulta:'',
+        categoria:'', 
+        sensacion: setprecio,
         precio:'',
-        categoria:'',
         direccion:'',
         notas:''
     })
   
 
-    const { nombre, fecha, hora, time, categoria, direccion, resulta, precio, notas, id } = recordatorio;
+    const { nombre, fecha, hora, time, categoria, direccion, sensacion, precio, notas, id } = recordatorio;
 
     const [ error, guardarError ] = useState(false);
 
@@ -31,7 +32,7 @@ export default function Formulario({almacenarRecordatorio}) {
     const [ priceButton, showPriceButton ] = useState(true);
 
 
-    const [ setprecio, setPrecio ] = useState('')
+    
 
 
 
@@ -64,8 +65,6 @@ export default function Formulario({almacenarRecordatorio}) {
         guardarError(false);
 
 
-        setPrecio( setprecio)
-
         recordatorio.id = shortid.generate()
 
 
@@ -75,11 +74,12 @@ export default function Formulario({almacenarRecordatorio}) {
             hora:'',
             time:'',
             categoria:'',
-            resulta:'',
+            sensacion:'',
             precio:'',
             direccion:'',
             notas:'',
-        })
+        }
+        )
         
 
 
