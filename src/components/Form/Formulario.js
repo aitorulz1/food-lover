@@ -1,26 +1,28 @@
 import React, { Fragment, useState } from 'react';
 import shortid from 'shortid';
 
-import Error from '../Error/Error'
+import Error from '../Error/Error';
 
-import './Formulario.css'
+import PropTypes from 'prop-types';
+
+import './Formulario.css';
 
 export default function Formulario({almacenarRecordatorio}) {
 
-    const [ setprecio, setPrecio ] = useState('');
-
+    
     const [ recordatorio, guardarRecordatorio ] = useState({
         nombre:'',
         fecha:'',
         hora:'',
         time:'',
         categoria:'', 
-        sensacion: setprecio,
+        sensacion:'', 
         precio:'',
         direccion:'',
         notas:''
     })
-  
+    
+    const [ setprecio, setPrecio ] = useState('');
 
     const { nombre, fecha, hora, time, categoria, direccion, sensacion, precio, notas, id } = recordatorio;
 
@@ -64,8 +66,8 @@ export default function Formulario({almacenarRecordatorio}) {
 
         guardarError(false);
 
-
-        recordatorio.id = shortid.generate()
+        recordatorio.sensacion = setprecio;
+        recordatorio.id = shortid.generate();
 
 
         guardarRecordatorio({
@@ -74,7 +76,7 @@ export default function Formulario({almacenarRecordatorio}) {
             hora:'',
             time:'',
             categoria:'',
-            sensacion:'',
+            sensacion: '',
             precio:'',
             direccion:'',
             notas:'',
@@ -259,9 +261,9 @@ export default function Formulario({almacenarRecordatorio}) {
                         </div>
 
 
-                            <div className="radio"><input className="radio" type="radio" checked={setprecio === 'barato'} value='barato' onChange={ e => setPrecio(e.target.value)} />Barato</div>
-                            <div className="radio"><input className="radio" type="radio" checked={setprecio === 'medio'} value='medio' onChange={ e => setPrecio(e.target.value)} />Medio</div>
-                            <div className="radio"><input className="radio" type="radio" checked={setprecio === 'caro'} value='caro' onChange={ e => setPrecio(e.target.value)} />Caro</div>
+                            <div className="radio"><input className="radio" type="radio" name='sensacion' checked={setprecio === 'barato'} value='barato' onChange={ e => setPrecio(e.target.value)} />Barato</div>
+                            <div className="radio"><input className="radio" type="radio" name='sensacion' checked={setprecio === 'medio'} value='medio' onChange={ e => setPrecio(e.target.value)} />Medio</div>
+                            <div className="radio"><input className="radio" type="radio" name='sensacion' checked={setprecio === 'caro'} value='caro' onChange={ e => setPrecio(e.target.value)} />Caro</div>
 
                             <input 
                                 type="number"
@@ -304,4 +306,9 @@ export default function Formulario({almacenarRecordatorio}) {
         </Fragment>
             
     )
+}
+
+
+Formulario.propTypes = {
+    almacenarRecordatorio: PropTypes.func.isRequired
 }

@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 
-import './Recordatorio.css'
+import PropTypes from 'prop-types';
+
+import './Recordatorio.css';
 
 export default function Recordatorio({cita, eliminarCita}) {
 
@@ -9,15 +11,18 @@ export default function Recordatorio({cita, eliminarCita}) {
     
     const [ empty, guardarEmpty ] = useState(false);
     const [ price, showPrice ] = useState(false);
+    const [ feeling, showFeeling ] = useState(false);
     const [ observ, guardarObserv ] = useState(false);
 
     useEffect(() => {
         if(!fecha || !hora) {
             guardarEmpty(true)
-        }else if (notas.length === 0) {
+        }if (!notas) {
             guardarObserv(true)
-        }else if(price.length === 0) {
+        }if(!price) {
             showPrice(true)
+        }if(!sensacion) {
+            showFeeling(true)
         }
     }, [fecha, hora, notas, sensacion, precio])
 
@@ -37,16 +42,18 @@ export default function Recordatorio({cita, eliminarCita}) {
                 <div className="nombre"><span className="title">Time:</span> {time}</div>
                 
                 <div className="nombre"><span className="title">Categoría:</span> {categoria}</div>
-
-                {!price ? null :
+                
+                {price ? null : 
                 (<div className="cuando"><span className="title">Precio:</span> {precio}</div>)
                 }
                 
-                <div className="nombre"><span className="title">Percepción:</span> {sensacion}</div>
+                {feeling ? null :
+                (<div className="nombre"><span className="title">Percepción:</span> {sensacion}</div>)
+                }
 
                 <div className="direccion"><span className="title">Dirección:</span> {direccion}</div>
 
-                {observ ? 'Observaciones: Nada que decir...' : 
+                {observ ? null : 
                 (<div className="observaciones"><span className="title">Observaciones:</span> {notas}</div>)}
 
             </div>
@@ -56,4 +63,9 @@ export default function Recordatorio({cita, eliminarCita}) {
             </button>
         </div>
     )
+}
+
+Recordatorio.protoTypes = {
+    cita: PropTypes.object.isRequired,
+    eliminarCita: PropTypes.func.isRequired
 }
