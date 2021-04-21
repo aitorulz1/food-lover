@@ -49,9 +49,6 @@ function App() {
   const titulo = citas.length === 0 ? 'Dóndeo puedo ir?' : 'Y por qué no a...';
 
 
-
-
-
   return (
     <Fragment>
 
@@ -69,7 +66,7 @@ function App() {
             
             <div className="half-sec">
               
-                <div className="titulo">{titulo}</div>
+                <div data-testid="titulo-dinamico" className="titulo">{titulo}</div>
         
                   {citas.map(cita => (
                     <Recordatorio

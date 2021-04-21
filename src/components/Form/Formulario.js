@@ -112,6 +112,7 @@ export default function Formulario({almacenarRecordatorio}) {
                     </div>
 
                     <input 
+                        data-testid='nombre'
                         type="text"
                         placeholder="nombre del restaurante"
                         name='nombre'
@@ -139,7 +140,7 @@ export default function Formulario({almacenarRecordatorio}) {
                     <div className="time">
 
                     <div className="label">
-                        <label>Fecha</label>
+                        <label data-testid='titulo'>Fecha</label>
                     </div>
 
                     <input 
