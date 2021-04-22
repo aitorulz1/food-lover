@@ -9,22 +9,22 @@ function App() {
 
   // Localstorage
   let citasLocalStorage = JSON.parse(localStorage.getItem('citas'));
-  if(!citasLocalStorage) {
+  if (!citasLocalStorage) {
     citasLocalStorage = [];
   }
 
-  const [ citas, guardarCitas ] = useState(citasLocalStorage);
+  const [citas, guardarCitas] = useState(citasLocalStorage);
 
   // Mantener citas refrescando página
   useEffect(() => {
-    if(citasLocalStorage){
+    if (citasLocalStorage) {
       localStorage.setItem('citas', JSON.stringify(citas))
     } else {
       localStorage.setItem('citas', JSON.stringify([]))
     }
   }, [citas])
 
-  
+
 
 
 
@@ -52,33 +52,33 @@ function App() {
   return (
     <Fragment>
 
-        <div className="wrapper">
+      <div className="wrapper">
 
-                <Header />
+        <Header />
 
-            <div className="half">
+        <div className="half">
 
-                <Formulario 
-                  almacenarRecordatorio= { almacenarRecordatorio }
-                />
-
-            </div>
-            
-            <div className="half-sec">
-              
-                <div data-testid="titulo-dinamico" className="titulo">{titulo}</div>
-        
-                  {citas.map(cita => (
-                    <Recordatorio
-                        key={cita.id}
-                        cita={cita}
-                        eliminarCita={eliminarCita}
-                    />
-                  ))}
-        
-              </div>
+          <Formulario
+            almacenarRecordatorio={almacenarRecordatorio}
+          />
 
         </div>
+
+        <div className="half-sec">
+
+          <div data-testid="titulo-dinamico" className="titulo">{titulo}</div>
+
+          {citas.map(cita => (
+            <Recordatorio
+              key={cita.id}
+              cita={cita}
+              eliminarCita={eliminarCita}
+            />
+          ))}
+
+        </div>
+
+      </div>
 
     </Fragment>
   );

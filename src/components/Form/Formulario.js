@@ -7,34 +7,34 @@ import PropTypes from 'prop-types';
 
 import './Formulario.css';
 
-export default function Formulario({almacenarRecordatorio}) {
+export default function Formulario({ almacenarRecordatorio }) {
 
-    
-    const [ recordatorio, guardarRecordatorio ] = useState({
-        nombre:'',
-        fecha:'',
-        hora:'',
-        time:'',
-        categoria:'', 
-        sensacion:'', 
-        precio:'',
-        direccion:'',
-        notas:''
+
+    const [recordatorio, guardarRecordatorio] = useState({
+        nombre: '',
+        fecha: '',
+        hora: '',
+        time: '',
+        categoria: '',
+        sensacion: '',
+        precio: '',
+        direccion: '',
+        notas: ''
     })
-    
-    const [ setprecio, setPrecio ] = useState('');
+
+    const [setprecio, setPrecio] = useState('');
 
     const { nombre, fecha, hora, time, categoria, direccion, sensacion, precio, notas, id } = recordatorio;
 
-    const [ error, guardarError ] = useState(false);
+    const [error, guardarError] = useState(false);
 
-    const [ verreserva, guardarVer ] = useState(false);
-    const [ button, showButton ] = useState(true);
-    const [ verprice, guardarVerPrice ] = useState(false);
-    const [ priceButton, showPriceButton ] = useState(true);
+    const [verreserva, guardarVer] = useState(false);
+    const [button, showButton] = useState(true);
+    const [verprice, guardarVerPrice] = useState(false);
+    const [priceButton, showPriceButton] = useState(true);
 
 
-    
+
 
 
 
@@ -42,7 +42,7 @@ export default function Formulario({almacenarRecordatorio}) {
         guardarVer(true)
         showButton(false)
     }
-    
+
     const onClickVerPrice = () => {
         guardarVerPrice(true)
         showPriceButton(false)
@@ -52,14 +52,14 @@ export default function Formulario({almacenarRecordatorio}) {
     const onChange = e => {
         guardarRecordatorio({
             ...recordatorio,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
     const onSubmit = e => {
         e.preventDefault();
 
-        if( nombre.trim() === '' || categoria.trim() === '' ) {
+        if (nombre.trim() === '' || categoria.trim() === '') {
             guardarError(true)
             return;
         }
@@ -71,18 +71,18 @@ export default function Formulario({almacenarRecordatorio}) {
 
 
         guardarRecordatorio({
-            nombre:'',
-            fecha:'',
-            hora:'',
-            time:'',
-            categoria:'',
+            nombre: '',
+            fecha: '',
+            hora: '',
+            time: '',
+            categoria: '',
             sensacion: '',
-            precio:'',
-            direccion:'',
-            notas:'',
+            precio: '',
+            direccion: '',
+            notas: '',
         }
         )
-        
+
 
 
         almacenarRecordatorio(recordatorio);
@@ -90,28 +90,27 @@ export default function Formulario({almacenarRecordatorio}) {
         showButton(true);
         guardarVerPrice(false);
         showPriceButton(true);
- 
+
     }
 
 
     return (
         <Fragment>
 
-          
+            { error ? <Error data-testid='alerta' message='Debe de rellenar todos los campos' /> : null}
 
-            { error ? <Error message='Debe de rellenar todos los campos' /> : null}
-        
-                <form
-                    onSubmit={onSubmit}
-                >
+            <form
+                data-testid='onclick'
+                onSubmit={onSubmit}
+            >
 
-                    <div className="block-half">
+                <div className="block-half">
 
                     <div className="label">
-                        <label>Nombre</label>
+                        <label data-testid='etiqueta'>Nombre</label>
                     </div>
 
-                    <input 
+                    <input
                         data-testid='nombre'
                         type="text"
                         placeholder="nombre del restaurante"
@@ -121,70 +120,71 @@ export default function Formulario({almacenarRecordatorio}) {
                         className="citainput"
                     />
 
-                { button ? (
-                    
-                    <button
-                        type='button'
-                        className='button'
-                        onClick={onClickVer}
-                    >¿Reservar?</button>
+                    {button ? (
 
-                )
-                : null }
+                        <button
+                            data-testid='btn-reservar'
+                            type='button'
+                            className='button'
+                            onClick={onClickVer}
+                        >¿Reservar?</button>
+
+                    )
+                        : null}
 
 
 
-                { verreserva ? ( 
+                    {verreserva ? (
 
-                <form>
-                    <div className="time">
+                        <form>
+                            <div className="time">
 
-                    <div className="label">
-                        <label data-testid='titulo'>Fecha</label>
-                    </div>
+                                <div className="label">
+                                    <label data-testid='fecha'>Fecha</label>
+                                </div>
 
-                    <input 
-                        type="date"
-                        placeholder="fecha"
-                        name='fecha'
-                        value={fecha}
-                        onChange={onChange}
-                        className="citainput"
-                    />
+                                <input
+                                    type="date"
+                                    placeholder="fecha"
+                                    name='fecha'
+                                    value={fecha}
+                                    onChange={onChange}
+                                    className="citainput"
+                                />
 
-                    </div>
+                            </div>
 
-                    <div className="time">
+                            <div className="time">
 
-                    <div className="label">
-                        <label>Hora</label>
-                    </div>
+                                <div className="label">
+                                    <label>Hora</label>
+                                </div>
 
-                    <input 
-                        type="time"
-                        placeholder="hora"
-                        name='hora'
-                        value={hora}
-                        onChange={onChange}
-                        className="citainput"
-                    />
+                                <input
+                                    type="time"
+                                    placeholder="hora"
+                                    name='hora'
+                                    value={hora}
+                                    onChange={onChange}
+                                    className="citainput"
+                                />
 
-                    </div>
+                            </div>
 
-                    </form>
-                )
-                :
+                        </form>
+                    )
+                        :
 
-                null
-                }
+                        null
+                    }
 
-                
+
 
                     <div className="label">
                         <label>Para...</label>
                     </div>
 
-                    <select 
+                    <select
                         name='time'
                         value={time}
                         onChange={onChange}
@@ -202,7 +202,7 @@ export default function Formulario({almacenarRecordatorio}) {
                         <label>Categoría</label>
                     </div>
 
-                    <select 
+                    <select
                         name='categoria'
                         value={categoria}
                         onChange={onChange}
@@ -221,18 +221,18 @@ export default function Formulario({almacenarRecordatorio}) {
 
                     </select>
 
-                    </div>
+                </div>
 
 
 
 
-                    <div className="block-half">
+                <div className="block-half">
 
                     <div className="label">
                         <label>Dirección</label>
                     </div>
 
-                    <input 
+                    <input
                         type="text"
                         placeholder="guarda la dirección"
                         name='direccion'
@@ -242,8 +242,8 @@ export default function Formulario({almacenarRecordatorio}) {
                     />
 
 
-                    { priceButton ? (
-                            
+                    {priceButton ? (
+
                         <button
                             type='button'
                             className='button'
@@ -251,61 +251,62 @@ export default function Formulario({almacenarRecordatorio}) {
                         >Precio</button>
 
                     )
-                    : null }
+                        : null}
 
-                    { verprice ? ( 
+                    {verprice ? (
 
-                    <form className="radius">
-                    
-                        <div className="label-radius">
-                            <label>Me resultó...</label>
-                        </div>
+                        <form className="radius">
+
+                            <div className="label-radius">
+                                <label>Me resultó...</label>
+                            </div>
 
 
-                            <div className="radio"><input className="radio" type="radio" name='sensacion' checked={setprecio === 'barato'} value='barato' onChange={ e => setPrecio(e.target.value)} />Barato</div>
-                            <div className="radio"><input className="radio" type="radio" name='sensacion' checked={setprecio === 'medio'} value='medio' onChange={ e => setPrecio(e.target.value)} />Medio</div>
-                            <div className="radio"><input className="radio" type="radio" name='sensacion' checked={setprecio === 'caro'} value='caro' onChange={ e => setPrecio(e.target.value)} />Caro</div>
+                            <div className="radio"><input className="radio" type="radio" name='sensacion' checked={setprecio === 'barato'} value='barato' onChange={e => setPrecio(e.target.value)} />Barato</div>
+                            <div className="radio"><input className="radio" type="radio" name='sensacion' checked={setprecio === 'medio'} value='medio' onChange={e => setPrecio(e.target.value)} />Medio</div>
+                            <div className="radio"><input className="radio" type="radio" name='sensacion' checked={setprecio === 'caro'} value='caro' onChange={e => setPrecio(e.target.value)} />Caro</div>
 
-                            <input 
+                            <input
                                 type="number"
-                                placeholder="precio/persona" 
+                                placeholder="precio/persona"
                                 name='precio'
-                                value={precio} 
+                                value={precio}
                                 onChange={onChange}
                                 className="citainput-precio"
                             />
 
-                    </form>
+                        </form>
 
 
 
-                    ) : null }
+                    ) : null}
 
-                        <div className="label">
-                            <label>Notas</label>
-                        </div>
-                        <input 
-                            type="text"
-                            placeholder="Qué tienes que decir?"
-                            name='notas'
-                            value={notas}
-                            onChange={onChange}
-                            className="citainput-notas"
-                        />
-
+                    <div className="label">
+                        <label>Notas</label>
                     </div>
-
- 
-                    <input 
-                        type="submit"
-                        value='Subir Restaurante'
-                        className="buttoncita"
+                    <input
+                        type="text"
+                        placeholder="Qué tienes que decir?"
+                        name='notas'
+                        value={notas}
+                        onChange={onChange}
+                        className="citainput-notas"
                     />
 
-                </form>
+                </div>
+
+
+                <input
+                    data-testid='btn-submit'
+                    type="submit"
+                    value='Subir Restaurante'
+                    className="buttoncita"
+                />
+
+            </form>
 
         </Fragment>
-            
+
     )
 }
 
