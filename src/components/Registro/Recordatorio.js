@@ -8,11 +8,12 @@ export default function Recordatorio({ cita, eliminarCita }) {
 
 
     const { nombre, fecha, hora, time, categoria, sensacion, precio, direccion, notas, id } = cita;
-
+    
     const [empty, guardarEmpty] = useState(false);
     const [price, showPrice] = useState(false);
     const [feeling, showFeeling] = useState(false);
     const [observ, guardarObserv] = useState(false);
+    
 
     useEffect(() => {
         if (!fecha || !hora) {
@@ -25,6 +26,8 @@ export default function Recordatorio({ cita, eliminarCita }) {
             showFeeling(true)
         }
     }, [fecha, hora, notas, sensacion, precio])
+    
+    if(!cita) return;
 
 
     return (
@@ -36,15 +39,15 @@ export default function Recordatorio({ cita, eliminarCita }) {
                 <div className="nombre"><span className="title">Nombre:</span> {nombre}</div>
 
                 {empty ? null :
-                    (<div className="cuando"><span className="title">Fecha:</span> {fecha} <span className="title">Hora:</span> {hora}</div>)
+                    (<div data-testid='cuando' className="cuando"><span className="title">Fecha:</span> {fecha} <span className="title">Hora:</span> {hora}</div>)
                 }
 
-                <div className="nombre"><span className="title">Time:</span> {time}</div>
+                <div className="nombre"><span  data-testid='etiqueta' className="title">Time:</span> {time}</div>
 
                 <div className="nombre"><span className="title">Categoría:</span> {categoria}</div>
 
                 {price ? null :
-                    (<div className="cuando"><span className="title">Precio:</span> {precio}</div>)
+                    (<div  data-testid='howmuch' className="cuando"><span className="title">Precio:</span> {precio}</div>)
                 }
 
                 {feeling ? null :
@@ -58,7 +61,7 @@ export default function Recordatorio({ cita, eliminarCita }) {
 
             </div>
 
-            <button className="delete" onClick={() => eliminarCita(id)}>
+            <button data-testid='btn-submit' className="delete" onClick={() => eliminarCita(id)}>
                 Eliminar Restaurante X
             </button>
         </div>
